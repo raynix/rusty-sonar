@@ -8,4 +8,4 @@ spec:
     spec:
       containers:
         - name: rusty-sonar
-          image: ghcr.io/raynix/rusty-sonar:v0.2
+          image: ghcr.io/raynix/rusty-sonar:
