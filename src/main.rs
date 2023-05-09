@@ -25,6 +25,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             }
         }
         let mut f = File::create(&metrics_file)?;
+        write!(f, "# HELP http_ping HTTP status code of a URL\n")?;
+        write!(f, "# TYPE http_ping gauge\n")?;
         for (k, v) in &metrics {
             write!(f, "http_ping{{host=\"{}\"}} {}\n", k, v)?;
         }
