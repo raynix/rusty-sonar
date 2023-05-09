@@ -35,7 +35,7 @@ jobs:
 
       - name: Update deployment version
         run: |
-          sed -i -E "s|(image: ghcr.io/raynix/rusty-sonar:).*|\1$build_number|g" .kustomize/raynix/patch.yaml
+          sed -i -E "s|(image: ghcr.io/raynix/rusty-sonar:).*|\1$build_tag|g" .kustomize/raynix/patch.yaml
 
       - name: Auto commit & push changes
         run: |
