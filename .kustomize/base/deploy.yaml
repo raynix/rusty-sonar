@@ -25,7 +25,7 @@ spec:
         - name: nginx
           image: nginx
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           volumeMounts:
             - name: metrics-volume
               mountPath: /usr/share/nginx/html
