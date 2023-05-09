@@ -1,0 +1,11 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rusty-sonar
+spec:
+  template:
+    spec:
+      containers:
+        - name: rusty-sonar
+          image: ghcr.io/raynix/rusty-sonar:v0.2

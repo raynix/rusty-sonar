@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rusty-sonar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rusty-sonar
+  template:
+    metadata:
+      labels:
+        app: rusty-sonar
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: metrics-volume
+              mountPath: /usr/share/nginx/html
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+        - name: rusty-sonar
+          image: ghcr.io/raynix/rusty-sonar:v0.2
+          volumeMounts:
+            - name: metrics-volume
+              mountPath: /var/tmp
+          envFrom:
+            - configMapRef:
+                name: urls
+          env:
+            - name: METRICS_FILE
+              value: /var/tmp/metrics
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+      volumes:
+        - name: metrics-volume
+          emptyDir:
+            medium: Memory

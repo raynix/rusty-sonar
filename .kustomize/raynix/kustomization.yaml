@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: rusty-sonar
+bases:
+  - ../base
+
+configMapGenerator:
+  - name: urls
+    literals:
+      - URL_RAYNIX=https://raynix.info
+      - URL_AWES=https://awes.one
+
+resources:
+  - ns.yaml
+
+patchesStrategicMerge:
+  - patch.yaml
