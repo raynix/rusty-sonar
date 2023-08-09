@@ -9,6 +9,9 @@ configMapGenerator:
     literals:
       - URL_RAYNIX=https://raynix.info
       - URL_AWES=https://awes.one
+      - URL_GRAFANA=https://grafana.awes.one
+      - URL_ARGOCD=https://argo.awes.one
+      - URL_SAUS=https://sausl.ink
 
 resources:
   - ns.yaml
