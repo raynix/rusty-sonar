@@ -16,23 +16,12 @@ spec:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                - amd64
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
       containers:
-        - name: nginx
-          image: nginx
-          ports:
-            - containerPort: 80
-          volumeMounts:
-            - name: metrics-volume
-              mountPath: /usr/share/nginx/html
-          resources:
-            requests:
-              cpu: 50m
-              memory: 50Mi
         - name: rusty-sonar
           image: ghcr.io/raynix/rusty-sonar:v0.2
           volumeMounts:
@@ -48,7 +37,5 @@ spec:
             requests:
               cpu: 100m
               memory: 100Mi
-      volumes:
-        - name: metrics-volume
-          emptyDir:
-            medium: Memory
+          ports:
+            - containerPort: 3000
